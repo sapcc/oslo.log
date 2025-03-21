@@ -1722,6 +1722,7 @@ class LogConfigTestCase(BaseTestCase):
                           self.CONF,
                           'test_log_config_append')
 
+    @testtools.skipIf(os.getuid() == 0, "File can be read as root")
     def test_log_config_append_unreadable(self):
         os.chmod(self.log_config_append, 0)
         self.config(log_config_append=self.log_config_append)
